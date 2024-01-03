@@ -1,0 +1,308 @@
+<html dir="ltr"><head><title>NEWTON DIVIDED DIFFERENCE INTERPOLATION PROGRAM IN C :: Reader View</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+html {
+  overflow: overlay;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 30px auto 0 auto;
+  padding: 10px;
+}
+body[data-mode="light"] {
+  color:  #222;
+  border-color: %light-color%;
+  background-color:  whitesmoke;
+}
+body[data-mode="dark"] {
+  color:  #eee;
+  border-color: %dark-color%;
+  background-color:  #333;
+}
+body[data-mode="sepia"] {
+  color:  #5b4636;
+  border-color: %sepia-color%;
+  background-color:  #f4ecd8;
+}
+body[data-mode="solarized-light"] {
+  color:  #586e75;
+  border-color: %solarized-light-color%;
+  background-color:  #fdf6e3;
+}
+body[data-mode="nord-light"] {
+  color:  #2e3440;
+  border-color: %nord-light-color%;
+  background-color:  #e5e9f0;
+}
+body[data-mode="groove-dark"] {
+  color:  #cec4ac;
+  border-color: %groove-dark-color%;
+  background-color:  #282828;
+}
+body[data-mode="solarized-dark"] {
+  color:  #93a1a1;
+  border-color: %solarized-dark-color%;
+  background-color:  #002b36;
+}
+body[data-mode="nord-dark"] {
+  color:  #e5e9f0;
+  border-color: %nord-dark-color%;
+  background-color:  #2e3440;
+}
+@media print {
+  body[data-mode="light"],
+  body[data-mode="dark"],
+  body[data-mode="sepia"],
+  body[data-mode="solarized-light"],
+  body[data-mode="nord-light"],
+  body[data-mode="groove-dark"],
+  body[data-mode="solarized-dark"],
+  body[data-mode="nord-dark"] {
+    color: #000;
+    border-color: #000;
+    background-color: #fff;
+  }
+}
+body[data-loaded=true] {
+  
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+img:not([width])[src$=".svg"] {
+  max-width: 100px;
+}
+body[data-images=false] canvas,
+body[data-images=false] svg,
+body[data-images=false] img {
+  display: none;
+}
+a {
+  color: #0095dd;
+  text-decoration: none;
+}
+#reader-domain {
+  font-family: Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  border-bottom-color: currentcolor;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+  direction: ltr;
+}
+#reader-domain > span:first-child {
+  font-size: 1.1em;
+}
+#reader-domain > span:last-child {
+  font-size: 0.8em;
+}
+#reader-title {
+  font-size: 1.6em;
+  line-height: 1.25em;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0;
+}
+#reader-credits,
+#doi,
+#published-time,
+#reader-estimated-time {
+  font-size: 0.85em;
+  line-height: 1.48em;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+#reader-credits:not(:empty)::after {
+  content: ' ⋮ ';
+}
+#published-time:not(:empty)::before {
+  content: ' ⋮ ';
+}
+#doi-json {
+  overflow: hidden;
+}
+#doi-json code {
+  overflow: auto;
+  max-height: 400px;
+}
+#published-time:empty,
+#reader-credits:empty {
+  display: none;
+}
+body[data-speech="true"] .tts-box {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 32px;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 0 0 1000vw rgba(128, 128, 128, 0.2);
+}
+body[data-speech="true"] .tts-word {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background-color: red;
+  height: 2px;
+}
+.tts-word.hidden,
+.tts-box.hidden {
+  display: none;
+}
+body[data-speech="false"] .tts-speaking::after {
+  display: none;
+}
+mark.hghlght {
+  background-color: #ffff81;
+}
+.hidden {
+  display: none;
+}
+.note {
+  position: absolute;
+  z-index: 10;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.note:focus {
+  z-index: 11;
+}
+</style>
+  <style id="user-css">body {
+  padding-bottom: 64px;
+}
+a:visited {
+  color: #d33bf0;
+}
+a:link, a:link:hover, a:link:active, a:link * {
+  color: #0095dd;
+}
+a:link {
+  text-decoration: none;
+  font-weight: normal;
+}
+pre {
+  white-space: pre-wrap;
+}
+pre code {
+  background-color: #eff0f1;
+  color: #393318;
+  font-family: monospace;
+  display: block;
+  padding: 5px 10px;
+}
+body[data-mode="dark"] pre code {
+  background-color: #585858;
+  color: #e8e8e8;
+}
+
+/* CSS for sans-serif fonts */
+body[data-font=sans-serif] {}
+/* CSS for serif fonts */
+body[data-font=serif] {}
+
+/* CSS for "sepia" theme */
+body[data-mode=sepia] {
+}
+/* CSS for "light" theme */
+body[data-mode=light] {}
+/* CSS for "dark" theme */
+body[data-mode=dark] {}</style>
+</head>
+<body tabindex="1" data-images="false" data-mode="groove-dark" data-font="sans-serif" data-loaded="true" style="user-select: initial;"><div id="readability-page-1" class="page"><div dir="ltr" trbidi="on" data-version="1" id="content-wrapper"><div data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""><pre>// Newton's divide difference table</pre><pre><span data-darkreader-inline-color="">#include&lt;stdio.h&gt;</span>
+<span data-darkreader-inline-color="">#include&lt;conio.h&gt;</span>
+
+<span data-darkreader-inline-color="">void</span> main()
+{
+<span data-darkreader-inline-color="">  float</span> x[<span data-darkreader-inline-color="">10</span>],y[<span data-darkreader-inline-color="">10</span>],d[<span data-darkreader-inline-color="">10</span>][<span data-darkreader-inline-color="">10</span>];
+<span data-darkreader-inline-color="">  float</span> a,u,sum<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">0</span>,prod;
+<span data-darkreader-inline-color="">  int</span> i,j,n,k;
+
+  clrscr();
+  printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> enter the no of points"</span>);
+  scanf(<span data-darkreader-inline-bgcolor="">"%d"</span>,<span data-darkreader-inline-color="">&amp;</span>n);
+  printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor="">enter the value for interpolation"</span>);
+  scanf(<span data-darkreader-inline-bgcolor="">"%f"</span>,<span data-darkreader-inline-color="">&amp;</span>a);
+  printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> enter the value for x"</span>);
+<span data-darkreader-inline-color="">  for</span>(i<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">1</span>;i<span data-darkreader-inline-color="">&lt;=</span>n;i<span data-darkreader-inline-color="">++</span>)
+  {
+    scanf(<span data-darkreader-inline-bgcolor="">"%f"</span>,<span data-darkreader-inline-color="">&amp;</span>x[i]);
+  }
+  printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> enter the value for y"</span>);
+<span data-darkreader-inline-color="">  for</span>(i<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">1</span>;i<span data-darkreader-inline-color="">&lt;=</span>n;i<span data-darkreader-inline-color="">++</span>)
+  {
+    scanf(<span data-darkreader-inline-bgcolor="">"%f"</span>,<span data-darkreader-inline-color="">&amp;</span>y[i]);
+  }
+<span data-darkreader-inline-color="">  /*for(i=1;i&lt;=n;i++)</span>
+<span data-darkreader-inline-color="">  {</span>
+<span data-darkreader-inline-color="">    printf("\n x=%f",x[i]);</span>
+<span data-darkreader-inline-color="">    printf("\n y=%f",y[i]);</span>
+<span data-darkreader-inline-color="">  } */</span>
+<span data-darkreader-inline-color="">  if</span>((a<span data-darkreader-inline-color="">&lt;</span>x[<span data-darkreader-inline-color="">1</span>])<span data-darkreader-inline-color="">||</span>(a<span data-darkreader-inline-color="">&gt;</span>x[n]))
+  {
+    printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> values lies outside the range"</span>);
+  }
+<span data-darkreader-inline-color="">  //i=1;</span>
+<span data-darkreader-inline-color="">  /*while(a&gt;x[i])</span>
+<span data-darkreader-inline-color="">  //{</span>
+<span data-darkreader-inline-color="">    i++;</span>
+<span data-darkreader-inline-color="">  }</span>
+<span data-darkreader-inline-color="">  k=i-1;</span>
+<span data-darkreader-inline-color="">  printf("\n k=%d",k);*/</span>
+<span data-darkreader-inline-color="">  for</span>(j<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">1</span>;j<span data-darkreader-inline-color="">&lt;=</span>n<span data-darkreader-inline-color="">-</span><span data-darkreader-inline-color="">1</span>;j<span data-darkreader-inline-color="">++</span>)
+  {
+<span data-darkreader-inline-color="">    for</span>(i<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">1</span>;i<span data-darkreader-inline-color="">&lt;=</span>(n<span data-darkreader-inline-color="">-</span>j);i<span data-darkreader-inline-color="">++</span>)
+    {
+<span data-darkreader-inline-color="">      if</span>(j<span data-darkreader-inline-color="">==</span><span data-darkreader-inline-color="">1</span>)
+      {
+        d[i][j]<span data-darkreader-inline-color="">=</span>((y[i<span data-darkreader-inline-color="">+</span><span data-darkreader-inline-color="">1</span>]<span data-darkreader-inline-color="">-</span>y[i])<span data-darkreader-inline-color="">/</span>(x[i<span data-darkreader-inline-color="">+</span><span data-darkreader-inline-color="">1</span>]<span data-darkreader-inline-color="">-</span>x[i]));
+        printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> 1d[i][j]=%f"</span>,d[i][j]);
+      }
+<span data-darkreader-inline-color="">      else</span>
+        d[i][j]<span data-darkreader-inline-color="">=</span>((d[i<span data-darkreader-inline-color="">+</span><span data-darkreader-inline-color="">1</span>][j<span data-darkreader-inline-color="">-</span><span data-darkreader-inline-color="">1</span>]<span data-darkreader-inline-color="">-</span>d[i][j<span data-darkreader-inline-color="">-</span><span data-darkreader-inline-color="">1</span>])<span data-darkreader-inline-color="">/</span>(x[i<span data-darkreader-inline-color="">+</span>j]<span data-darkreader-inline-color="">-</span>x[i]));
+      printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> d[i][j]=%f"</span>,d[i][j]);
+    }</pre>
+<pre>  }
+  sum<span data-darkreader-inline-color="">=</span>y[i];
+  printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> sum=%f"</span>,sum);
+<span data-darkreader-inline-color="">  for</span>(i<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">1</span>;i<span data-darkreader-inline-color="">&lt;=</span>n;i<span data-darkreader-inline-color="">++</span>)
+  {
+    prod<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">1.0</span>;
+    <span data-darkreader-inline-color="">for</span>(j<span data-darkreader-inline-color="">=</span><span data-darkreader-inline-color="">0</span>;j<span data-darkreader-inline-color="">&lt;=</span>i<span data-darkreader-inline-color="">-</span><span data-darkreader-inline-color="">1</span>;j<span data-darkreader-inline-color="">++</span>)
+<span data-darkreader-inline-color="">    // prod=prod*(u-j);</span>
+    prod<span data-darkreader-inline-color="">=</span>prod<span data-darkreader-inline-color="">*</span>(a<span data-darkreader-inline-color="">-</span>x[i]);
+    sum<span data-darkreader-inline-color="">=</span>sum<span data-darkreader-inline-color="">+</span>d[i][j]<span data-darkreader-inline-color="">*</span>prod;
+  }
+  printf(<span data-darkreader-inline-bgcolor="">"</span><span data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">\n</span><span data-darkreader-inline-bgcolor=""> interpolated value=%f"</span>,sum);
+  getch();
+}
+</pre>
+</div>
+</div></div>
+  <span></span> <!-- for IntersectionObserver -->
+  
+  
+  
+  
+
+
+</body><style>body {
+      font-size:  18px;
+      font-family: Helvetica, Arial, sans-serif;
+      width: calc(100vw - 50px);
+    }
+    .page {
+      line-height: 27.0px;
+    }
+    h1, h2, h3 {
+      line-height: initial;
+    }</style></html>

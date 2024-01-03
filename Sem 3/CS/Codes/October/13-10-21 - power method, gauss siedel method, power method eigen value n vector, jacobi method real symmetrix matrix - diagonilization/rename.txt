@@ -1,0 +1,1 @@
+power method, gauss siedel method, power method eigen value n vector, jacobi method real symmetrix matrix

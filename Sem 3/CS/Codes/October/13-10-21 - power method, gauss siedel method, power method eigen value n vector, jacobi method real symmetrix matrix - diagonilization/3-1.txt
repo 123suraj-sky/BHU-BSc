@@ -1,0 +1,47 @@
+Enter Order of Matrix: 2 ↲
+ Enter Tolerable Error: 0.001 ↲
+ Enter Coefficient of Matrix:
+ a[1][1]=5 ↲
+ a[1][2]=4 ↲
+ a[2][1]=1 ↲
+ a[2][2]=2 ↲
+ Enter Initial Guess Vector:
+ x[1]=1 ↲
+ x[2]=1 ↲
+ 
+ STEP-1:
+ Eigen Value = 9.000000
+ Eigen Vector:
+ 1.000000    0.333333
+
+ STEP-2:
+ Eigen Value = 6.333333
+ Eigen Vector:
+ 1.000000    0.263158
+
+ STEP-3:
+ Eigen Value = 6.052631
+ Eigen Vector:
+ 1.000000    0.252174
+
+ STEP-4:
+ Eigen Value = 6.008696
+ Eigen Vector:
+ 1.000000    0.250362
+
+ STEP-5: 
+ Eigen Value = 6.001447
+ Eigen Vector:
+ 1.000000    0.250060
+
+ STEP-6:
+ Eigen Value = 6.000241
+ Eigen Vector:
+ 1.000000    0.250010
+
+ STEP-7:
+ Eigen Value = 6.000040
+ Eigen Vector:
+ 1.000000    0.250002
+ 
+ Note: ↲ indicates ENTER is pressed.

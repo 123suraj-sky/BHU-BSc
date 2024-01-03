@@ -1,0 +1,402 @@
+<html><head><title>Newton Interpolation Program in C Language :: Reader View</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+html {
+  overflow: overlay;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 30px auto 0 auto;
+  padding: 10px;
+}
+body[data-mode="light"] {
+  color:  #222;
+  border-color: %light-color%;
+  background-color:  whitesmoke;
+}
+body[data-mode="dark"] {
+  color:  #eee;
+  border-color: %dark-color%;
+  background-color:  #333;
+}
+body[data-mode="sepia"] {
+  color:  #5b4636;
+  border-color: %sepia-color%;
+  background-color:  #f4ecd8;
+}
+body[data-mode="solarized-light"] {
+  color:  #586e75;
+  border-color: %solarized-light-color%;
+  background-color:  #fdf6e3;
+}
+body[data-mode="nord-light"] {
+  color:  #2e3440;
+  border-color: %nord-light-color%;
+  background-color:  #e5e9f0;
+}
+body[data-mode="groove-dark"] {
+  color:  #cec4ac;
+  border-color: %groove-dark-color%;
+  background-color:  #282828;
+}
+body[data-mode="solarized-dark"] {
+  color:  #93a1a1;
+  border-color: %solarized-dark-color%;
+  background-color:  #002b36;
+}
+body[data-mode="nord-dark"] {
+  color:  #e5e9f0;
+  border-color: %nord-dark-color%;
+  background-color:  #2e3440;
+}
+@media print {
+  body[data-mode="light"],
+  body[data-mode="dark"],
+  body[data-mode="sepia"],
+  body[data-mode="solarized-light"],
+  body[data-mode="nord-light"],
+  body[data-mode="groove-dark"],
+  body[data-mode="solarized-dark"],
+  body[data-mode="nord-dark"] {
+    color: #000;
+    border-color: #000;
+    background-color: #fff;
+  }
+}
+body[data-loaded=true] {
+  
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+img:not([width])[src$=".svg"] {
+  max-width: 100px;
+}
+body[data-images=false] canvas,
+body[data-images=false] svg,
+body[data-images=false] img {
+  display: none;
+}
+a {
+  color: #0095dd;
+  text-decoration: none;
+}
+#reader-domain {
+  font-family: Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  border-bottom-color: currentcolor;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+  direction: ltr;
+}
+#reader-domain > span:first-child {
+  font-size: 1.1em;
+}
+#reader-domain > span:last-child {
+  font-size: 0.8em;
+}
+#reader-title {
+  font-size: 1.6em;
+  line-height: 1.25em;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0;
+}
+#reader-credits,
+#doi,
+#published-time,
+#reader-estimated-time {
+  font-size: 0.85em;
+  line-height: 1.48em;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+#reader-credits:not(:empty)::after {
+  content: ' ⋮ ';
+}
+#published-time:not(:empty)::before {
+  content: ' ⋮ ';
+}
+#doi-json {
+  overflow: hidden;
+}
+#doi-json code {
+  overflow: auto;
+  max-height: 400px;
+}
+#published-time:empty,
+#reader-credits:empty {
+  display: none;
+}
+body[data-speech="true"] .tts-box {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 32px;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 0 0 1000vw rgba(128, 128, 128, 0.2);
+}
+body[data-speech="true"] .tts-word {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background-color: red;
+  height: 2px;
+}
+.tts-word.hidden,
+.tts-box.hidden {
+  display: none;
+}
+body[data-speech="false"] .tts-speaking::after {
+  display: none;
+}
+mark.hghlght {
+  background-color: #ffff81;
+}
+.hidden {
+  display: none;
+}
+.note {
+  position: absolute;
+  z-index: 10;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.note:focus {
+  z-index: 11;
+}
+</style>
+  <style id="user-css">body {
+  padding-bottom: 64px;
+}
+a:visited {
+  color: #d33bf0;
+}
+a:link, a:link:hover, a:link:active, a:link * {
+  color: #0095dd;
+}
+a:link {
+  text-decoration: none;
+  font-weight: normal;
+}
+pre {
+  white-space: pre-wrap;
+}
+pre code {
+  background-color: #eff0f1;
+  color: #393318;
+  font-family: monospace;
+  display: block;
+  padding: 5px 10px;
+}
+body[data-mode="dark"] pre code {
+  background-color: #585858;
+  color: #e8e8e8;
+}
+
+/* CSS for sans-serif fonts */
+body[data-font=sans-serif] {}
+/* CSS for serif fonts */
+body[data-font=serif] {}
+
+/* CSS for "sepia" theme */
+body[data-mode=sepia] {
+}
+/* CSS for "light" theme */
+body[data-mode=light] {}
+/* CSS for "dark" theme */
+body[data-mode=dark] {}</style>
+</head>
+<body tabindex="1" data-images="false" data-mode="groove-dark" data-font="sans-serif" data-loaded="true">
+  <span></span> <!-- for IntersectionObserver -->
+  <a id="reader-domain" href="https://www.computersciencejunction.in/2016/12/29/newton-backward-interpolation-program-html/">
+    <span>www.computersciencejunction.in</span>
+    <span>/2016/12/29/newton-backward-interpolation-program-html/</span>
+  </a>
+  <h1 dir="auto" id="reader-title">Newton Interpolation Program in C Language</h1>
+  <span dir="auto" id="reader-credits">admin</span>
+  <span dir="auto" id="reader-estimated-time">4-6 minutes</span>
+  <span dir="auto" id="published-time">12/29/2016</span>
+  <hr>
+  <div id="readability-page-1" class="page"><div id="content">
+		<main id="main" role="main">
+
+		
+<article id="post-110">
+			<div>
+			<figure><img width="901" height="492" src="https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd.jpg" alt="newton backward interpolation program in c" loading="lazy" srcset="https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd.jpg 901w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-300x164.jpg 300w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-768x419.jpg 768w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-696x380.jpg 696w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-769x420.jpg 769w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-24x13.jpg 24w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-36x20.jpg 36w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-48x26.jpg 48w" sizes="(max-width: 901px) 100vw, 901px"></figure>
+		</div><!-- .single-post-image -->
+		<!-- .entry-header -->
+
+	<div>
+		<div dir="ltr">
+<p>I have explained&nbsp;<a href="https://en.wikipedia.org/wiki/Isaac_Newton"><strong>the newton</strong></a><strong>&nbsp;interpolation program in c</strong>&nbsp;programming here in this post. This tutorial helps computer science students understand the concepts of interpolation, extrapolation in numerical techniques.</p>
+<p>This tutorial helps the students implement the program for backward interpolation in&nbsp;<a href="https://www.computersciencejunction.in/2017/11/06/learn-c-programming-language-html/"><strong>the c programming language</strong></a>.</p>
+
+</div>
+<h2><span data-darkreader-inline-color="">Frequently Asked Questions</span></h2>
+<div>
+
+<p>This newton interpolation program based tutorial will help the computer science graduate to get the answer to the following questions</p>
+<ul>
+<li>What is&nbsp;<strong>Interpolation</strong>?</li>
+<li>What is&nbsp;<strong>extrapolation</strong>?</li>
+<li>What is&nbsp;<strong>Newton Backward Interpolation Formula</strong>?</li>
+<li>How to make&nbsp;<strong>a program in c for the newton backward interpolation</strong>?</li>
+</ul>
+</div>
+<p><img loading="lazy" src="https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd.jpg" alt="newton backward interpolation program in c" width="901" height="492" srcset="https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd.jpg 901w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-300x164.jpg 300w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-768x419.jpg 768w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-696x380.jpg 696w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-769x420.jpg 769w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-24x13.jpg 24w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-36x20.jpg 36w, https://www.computersciencejunction.in/wp-content/uploads/2016/12/newtonbackwrd-48x26.jpg 48w" sizes="(max-width: 901px) 100vw, 901px"></p>
+<div dir="ltr">
+<div>
+
+<h2><span data-darkreader-inline-color="">Newton Backward Interpolation Program in C</span></h2>
+<h3><span data-darkreader-inline-color="">What is Interpolation ?</span></h3>
+</div>
+<p><span><b><span data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""><span>I</span><span>nterpolation </span></span></b><span data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor=""><span data-darkreader-inline-color="">is a method of making the estimate of &nbsp;the value of a function for any intermediate value of the independent variable</span><span data-darkreader-inline-color="">.</span></span></span></p>
+<h3><span data-darkreader-inline-color="">What is Extrapolation ?</span></h3>
+<p><span data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor=""><span><span>Extrapolation is a &nbsp;process of computing the value of the function outside the given range.</span></span></span></p>
+<h2><span data-darkreader-inline-color="">What is Newton’s Forward and Backward Interpolation ?</span></h2>
+<div>
+<p>Given the set of (n+1) values of x and y, it is required to find y n (x), a polynomial of the nth Degree such that y and y n (x) agree at the tabulated points. The values of x be equidistant i.e. xi = x0 + ih, i=0, 1, 2…..n.</p>
+<p>Since y n(x) is a polynomial of the nth Degree</p>
+<p><strong>y n(x) =a0 +a1(x-x0) +a2(x-x0)(x-x1)………….+an(x-x0)………….(x-x n-1)</strong></p>
+<p>Imposing now the condition that y and yn(x) should agree at the set of tabulated points and applying x=x0+ph, we get Newton’s Forward difference interpolation formula which is given by.</p>
+<p><strong>y n(x) = y0 + pDy0 + p (p-1) / 2! D2y0+ p (p-1) (p-2) / 3! D3y0 + ……… + p (p-1) (p-2)…. (p-n+1) / n! Dn y0</strong></p>
+<p>It is helpful for interpolation near the beginning of a set of tabular values.</p>
+<p>Similarly, if you (x) chosen in the form</p>
+
+<p><strong>y n(x) = a0+a1 (x-x n) + a2 (x-x n) (x-x n-1) +……..an(x-x n) (x-x n-1)……(x-x1)&nbsp;</strong></p>
+<p>then we have</p>
+<p><strong>y n (x) = y n + pÑy n + p(p+1) / 2 Ñ2 y n + ………+ p(p+1)…..(p+n-1) / n! Ñ n y n&nbsp; &nbsp;</strong></p>
+<p>where p= x-x n / h</p>
+<p>This is&nbsp;<strong>newton’s backward difference interpolation formula</strong>, and it uses tabular values to the left of y n. It is helpful for interpolation near the end of the tabular values.</p>
+
+</div>
+<h2><span data-darkreader-inline-color="">Newton Backward Interpolation Program in C</span></h2>
+<p>Program to implement the newton interpolation program in c for backward method programing language is give below. Students are suggested to implement this program in C. If you face any problem or error then you may ask in the comment.</p>
+<div data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+<p><strong>Void Main()</strong></p>
+<p><strong><span>{</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;float x[10],y[10][10],sum,p,u,temp;</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int i,n,j,k=0,f,m;</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; float fact(int);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;clrscr();</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf(“/n how many record you will be enter: “);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;scanf(“%d”,&amp;n);</span></strong></p>
+<p><strong><span><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(i=0; i</span> &lt;n; i++)</span><span>&nbsp; &nbsp;{</span></strong><br>
+<strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf(“/n nenter the value of x%d: “,i);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;scanf(“%f”,&amp;x[i]);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf(“/n nenter the value of f(x%d): “,i);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scanf(“%f”,&amp;y[k][i]);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf(“nnEnter X for finding f(x): “);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scanf(“%f”,&amp;p);</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(i=1;i &lt;n:i++)</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(j=i;j &lt;n;j++)</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y[i][j]=y[i-1][j]-y[i-1][j-1];</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></strong></p>
+<p><strong>&nbsp;printf(“n_____________________________________________________n”);</strong></p>
+<p><strong>&nbsp; printf(“n &nbsp;x(i)t &nbsp; y(i)t &nbsp; &nbsp;y1(i) &nbsp; &nbsp;y2(i) &nbsp; &nbsp;y3(i) &nbsp; &nbsp;y4(i)”);</strong></p>
+<p><strong>&nbsp;printf(“n_____________________________________________________n”);</strong></p>
+<p><strong>&nbsp; for(i=0;i&nbsp; {</strong></p>
+<p><strong>&nbsp; &nbsp; printf(“n %.3f”,x[i]);</strong></p>
+<p><strong>&nbsp; &nbsp; for(j=0;j&lt;=i;j++)</strong></p>
+<p><strong>&nbsp; &nbsp; {</strong></p>
+<p><strong>&nbsp; &nbsp; &nbsp;printf(” &nbsp; “);</strong></p>
+<p><strong>&nbsp; &nbsp; &nbsp;printf(” %.3f”,y[j][i]);</strong></p>
+<p><strong>&nbsp; &nbsp; }</strong></p>
+<p><strong>&nbsp; &nbsp;printf(“n”);</strong></p>
+<p><strong>&nbsp; }</strong></p>
+<p><strong>&nbsp; i=0;</strong></p>
+<p><strong>&nbsp; do</strong></p>
+<p><strong>&nbsp; {</strong></p>
+<p><strong>&nbsp; &nbsp;if(x[i]</strong></p>
+<div>
+<p><strong><span>&nbsp; &nbsp; k=1;</span></strong></p>
+<p><strong><span>&nbsp; &nbsp;else</span></strong></p>
+<p><strong><span>&nbsp; &nbsp; i++;</span></strong></p>
+<p><strong><span>&nbsp; }while(k != 1);</span></strong></p>
+<p><strong><span>&nbsp; f=i+1;</span></strong></p>
+<p><strong><span>&nbsp; u=(p-x[f])/(x[f]-x[f-1]);</span></strong></p>
+<p><strong><span>&nbsp; printf(“nn u = %.3f “,u);</span></strong></p>
+<p><strong><span><span>&nbsp; n=n-i+1;</span></span></strong></p>
+<p><strong><span>&nbsp; sum=0;</span></strong></p>
+<p><strong><span><span>for(i=0;i<span>&nbsp; {</span></span></span></strong></p>
+<p><strong><span><span>&nbsp; &nbsp;temp=1;</span></span></strong></p>
+<p><strong><span>&nbsp; &nbsp;for(j=0;j&nbsp; &nbsp;{</span></strong></p>
+<p><strong><span><span>&nbsp; &nbsp; temp = temp * (u + j);</span></span></strong></p>
+<p><strong><span><span><span>&nbsp; &nbsp;}</span></span></span></strong></p>
+<p><strong><span><span><span>&nbsp; &nbsp; m=fact(i);</span></span></span></strong></p>
+<p><strong><span><span>&nbsp; &nbsp; sum = sum + temp*(y[i][f]/m);</span></span></strong></p>
+<p><strong><span><span>&nbsp; }</span></span></strong></p>
+<p><strong><span><span>&nbsp; printf(“nn f(%.2f) = %f “,p,sum);</span></span></strong></p>
+<p><strong><span><span>&nbsp; getch();</span></span></strong></p>
+<p><strong><span><span>}</span></span></strong></p>
+<p><strong><span><span>float fact(int a)</span></span></strong></p>
+<p><strong><span><span>{</span></span></strong></p>
+<p><strong>&nbsp; float fac = 1;</strong></p>
+<p><strong>&nbsp; if (a == 0)</strong></p>
+<p><strong>&nbsp; &nbsp;return (1);</strong></p>
+<p><strong>&nbsp; else</strong></p>
+<p><strong>&nbsp; &nbsp;fac = a * fact(a-1);</strong></p>
+<p><strong>&nbsp; return(fac);</strong></p>
+<p><strong><span>}</span></strong></p>
+</div>
+
+</div>
+</div>
+<p><span data-darkreader-inline-color=""><strong>Output</strong></span></p>
+
+<div dir="ltr">
+<p><i><i><a href="https://1.bp.blogspot.com/-XXttySLVkQY/WGVi0WZ_coI/AAAAAAAAAN0/wLVAUVSLMgY4mgc1zfJ0swxi6R3etB8bgCLcB/s1600/nboutput.png"><span><img title="output for interploation formulas" src="https://1.bp.blogspot.com/-XXttySLVkQY/WGVi0WZ_coI/AAAAAAAAAN0/wLVAUVSLMgY4mgc1zfJ0swxi6R3etB8bgCLcB/s1600/nboutput.png" alt="newton forward interpolation formula"></span></a></i></i></p>
+</div>
+
+
+
+
+
+<!-- AI CONTENT END 1 -->
+	</div><!-- .entry-content -->
+
+	<!-- .entry-footer -->
+</article><!-- #post-## -->
+            <!--newspaper-lite-author-wrapper-->
+                         <!-- .related-articles-wrapper -->
+            
+	
+<!-- #comments -->
+
+		</main><!-- #main -->
+	</div></div>
+  <span></span> <!-- for IntersectionObserver -->
+  
+  
+  
+  
+
+
+</body><style>body {
+      font-size:  18px;
+      font-family: Helvetica, Arial, sans-serif;
+      width: calc(100vw - 50px);
+    }
+    .page {
+      line-height: 27.0px;
+    }
+    h1, h2, h3 {
+      line-height: initial;
+    }</style></html>

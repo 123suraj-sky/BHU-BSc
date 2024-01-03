@@ -1,0 +1,15 @@
+Enter the Total Number of Equations:   1
+Enter Allowed Error:   0.5
+
+Enter the Co-Efficients
+Matrix[1][1] = 1
+Matrix[1][2] = 4
+
+Y[1]=   4.000000
+
+Y[1]=   4.000000
+
+Solution
+
+Y[1]:   4.000000
+

@@ -1,0 +1,12 @@
+C Assignment
+
+1. Write a program to check whether a given matrix is orthogonal. --> AA' = 1, A' = (A)-1, |A| = 1
+A' means A Transpose
+
+2. Write a program to check whether the system of linear equations are consistency. --> consistency means solution exist
+
+3. Write a program to implement Gauss elimination method.
+
+4. Write a program to decompose a matrix into Lower triangular and upper triangular matrices.
+
+5. Write a program to implement Crout's method.

@@ -1,0 +1,1 @@
+accuracy in bisection, cube root using bisection, function root using regula falsi, function root using secant, function root using newton raphson

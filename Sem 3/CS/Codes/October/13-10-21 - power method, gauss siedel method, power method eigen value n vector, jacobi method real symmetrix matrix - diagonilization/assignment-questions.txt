@@ -1,0 +1,31 @@
+1. Write a program to implement Jacobi iteration method for system of Linear equations.
+
+2. Write a program to implement Gauss Seidel method for system of Linear equations.
+
+3. Write a program to implement Power method to find the largest Eigen values and vectors.
+
+4. Write a program to implement Jacobi method for diagonalization of real symmetric matrix.
+
+Note: Test the above codes on the problems discussed in the class.
+
+
+4 --> A = {{1, sqrt(2), 2},
+           {sqrt(2), 3, sqrt(2)},
+           {2, sqrt(2), 1}}; 
+           // solution is correct and in the codes
+
+3 --> A = {{1, 2, 0},
+           {2, 1, 0},
+           {0, 0, -1}};
+           // in 7th iteration eigen value = 3 and eigen vectors = {1,1,0}
+
+2 --> 20x1 + x2 - 2x3 = 17
+      3x1 + 20x2 - x3 = 18
+      2x1 + -3x2 + 20x3 = 25
+      // solution is x1 = 1, x2 = -1, x3 = 1
+
+1 --> 20x1 + x2 - 2x3 = 17
+      3x1 + 20x2 - x3 = 18
+      2x1 + -3x2 + 20x3 = 25
+      // solution is x1 = 1, x2 = -1, x3 = 1
+      // same equations as 2

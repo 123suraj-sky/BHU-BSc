@@ -1,0 +1,348 @@
+<html><head><title>Newton Forward Interpolation Programming in C :: Reader View</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+html {
+  overflow: overlay;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 30px auto 0 auto;
+  padding: 10px;
+}
+body[data-mode="light"] {
+  color:  #222;
+  border-color: %light-color%;
+  background-color:  whitesmoke;
+}
+body[data-mode="dark"] {
+  color:  #eee;
+  border-color: %dark-color%;
+  background-color:  #333;
+}
+body[data-mode="sepia"] {
+  color:  #5b4636;
+  border-color: %sepia-color%;
+  background-color:  #f4ecd8;
+}
+body[data-mode="solarized-light"] {
+  color:  #586e75;
+  border-color: %solarized-light-color%;
+  background-color:  #fdf6e3;
+}
+body[data-mode="nord-light"] {
+  color:  #2e3440;
+  border-color: %nord-light-color%;
+  background-color:  #e5e9f0;
+}
+body[data-mode="groove-dark"] {
+  color:  #cec4ac;
+  border-color: %groove-dark-color%;
+  background-color:  #282828;
+}
+body[data-mode="solarized-dark"] {
+  color:  #93a1a1;
+  border-color: %solarized-dark-color%;
+  background-color:  #002b36;
+}
+body[data-mode="nord-dark"] {
+  color:  #e5e9f0;
+  border-color: %nord-dark-color%;
+  background-color:  #2e3440;
+}
+@media print {
+  body[data-mode="light"],
+  body[data-mode="dark"],
+  body[data-mode="sepia"],
+  body[data-mode="solarized-light"],
+  body[data-mode="nord-light"],
+  body[data-mode="groove-dark"],
+  body[data-mode="solarized-dark"],
+  body[data-mode="nord-dark"] {
+    color: #000;
+    border-color: #000;
+    background-color: #fff;
+  }
+}
+body[data-loaded=true] {
+  
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+img:not([width])[src$=".svg"] {
+  max-width: 100px;
+}
+body[data-images=false] canvas,
+body[data-images=false] svg,
+body[data-images=false] img {
+  display: none;
+}
+a {
+  color: #0095dd;
+  text-decoration: none;
+}
+#reader-domain {
+  font-family: Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  border-bottom-color: currentcolor;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+  direction: ltr;
+}
+#reader-domain > span:first-child {
+  font-size: 1.1em;
+}
+#reader-domain > span:last-child {
+  font-size: 0.8em;
+}
+#reader-title {
+  font-size: 1.6em;
+  line-height: 1.25em;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0;
+}
+#reader-credits,
+#doi,
+#published-time,
+#reader-estimated-time {
+  font-size: 0.85em;
+  line-height: 1.48em;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+#reader-credits:not(:empty)::after {
+  content: ' ⋮ ';
+}
+#published-time:not(:empty)::before {
+  content: ' ⋮ ';
+}
+#doi-json {
+  overflow: hidden;
+}
+#doi-json code {
+  overflow: auto;
+  max-height: 400px;
+}
+#published-time:empty,
+#reader-credits:empty {
+  display: none;
+}
+body[data-speech="true"] .tts-box {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 32px;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 0 0 1000vw rgba(128, 128, 128, 0.2);
+}
+body[data-speech="true"] .tts-word {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background-color: red;
+  height: 2px;
+}
+.tts-word.hidden,
+.tts-box.hidden {
+  display: none;
+}
+body[data-speech="false"] .tts-speaking::after {
+  display: none;
+}
+mark.hghlght {
+  background-color: #ffff81;
+}
+.hidden {
+  display: none;
+}
+.note {
+  position: absolute;
+  z-index: 10;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.note:focus {
+  z-index: 11;
+}
+</style>
+  <style id="user-css">body {
+  padding-bottom: 64px;
+}
+a:visited {
+  color: #d33bf0;
+}
+a:link, a:link:hover, a:link:active, a:link * {
+  color: #0095dd;
+}
+a:link {
+  text-decoration: none;
+  font-weight: normal;
+}
+pre {
+  white-space: pre-wrap;
+}
+pre code {
+  background-color: #eff0f1;
+  color: #393318;
+  font-family: monospace;
+  display: block;
+  padding: 5px 10px;
+}
+body[data-mode="dark"] pre code {
+  background-color: #585858;
+  color: #e8e8e8;
+}
+
+/* CSS for sans-serif fonts */
+body[data-font=sans-serif] {}
+/* CSS for serif fonts */
+body[data-font=serif] {}
+
+/* CSS for "sepia" theme */
+body[data-mode=sepia] {
+}
+/* CSS for "light" theme */
+body[data-mode=light] {}
+/* CSS for "dark" theme */
+body[data-mode=dark] {}</style>
+</head>
+<body tabindex="1" data-images="false" data-mode="groove-dark" data-font="sans-serif" data-loaded="true" style="user-select: initial;"><h1 dir="auto" id="reader-title">Newton Forward Interpolation Programming in C</h1><div id="readability-page-1" class="page"><div>
+	<div>
+	<p><span>#include&lt;stdio.h&gt;
+	<br>void main() 
+	<br>{
+	<br><span>float x[20],fx[20][20],xvalue,h,p,temp,ans;</span>
+	<br><span>int n,i,j,fact;</span>
+	<br><span>printf("\n Enter the value of x to find f(x)...");
+	<br><span>scanf("%f",&amp;xvalue);</span>
+	<br><span>printf("\n Enter the number of observation you want to insert...");</span>
+	<br><span>scanf("%d",&amp;n);</span>
+	</span></span></p><p><span data-darkreader-inline-color="">//Input observation table</span>
+	<br><span>for(i=0;i&lt;n;i++)</span>
+	<br><span>{</span>
+	<br><span>printf("\n Enter the value of x...");</span>
+	<br><span>scanf("%f",&amp;x[i]);</span>
+	<br><span>printf("\n Enter the value of f(x)...");</span>
+	<br><span>scanf("%f",&amp;fx[i][0]);</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Calculate the value of <b>p</b></span>
+	<br><span>h=x[1]-x[0];</span>
+	<br><span>p=(xvalue-x[0])/h;</span></p><p><span data-darkreader-inline-color="">//Calculate the value of <b>∆x<sub>i</sub> , ∆<sup>2</sup>x<sub>i</sub> , ∆<sup>3</sup>x<sub>i</sub> , . . .</b> (where i = 1, 2, 3, . . . )</span>
+	<br><span>for(i=1;i&lt;n;i++)</span>
+	<br><span>{</span>
+	<br><span>for(j=0;j&lt;n-i;j++)</span>
+	<br><span>{</span>
+	<br><span>fx[j][i]=fx[j+1][i-1]-fx[j][i-1];</span>
+	<br><span>}</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Print the value of <b>∆x<sub>i</sub> , ∆<sup>2</sup>x<sub>i</sub> , ∆<sup>3</sup>x<sub>i</sub> , . . .</b> table</span>
+	<br><span>for(i=0;i&lt;n;i++)</span>
+	<br><span>{</span>
+	<br><span>printf("\n");</span>
+	<br><span>for(j=0;j&lt;n-i;j++)</span>
+	<br><span>{</span>
+	<br><span>printf("%f ",fx[i][j]);</span>
+	<br><span>}</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Find <b>f(x)</b> using Newton's Forward Interpolation Method</span>
+	<br><span>ans=fx[0][0];</span>
+	<br><span>for(i=1;i&lt;n;i++)</span>
+	<br><span>{</span></p><p><span data-darkreader-inline-color="">//Calculate <b>p , p(p - 1) , p(p - 1)(p - 2) , . . .</b> </span>
+	<br><span>temp=p;</span>
+	<br><span>for(j=1;j&lt;i;j++)</span>
+	<br><span>{</span>
+	<br><span>temp=temp*(p-j);</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Factorial calculation</span>
+	<br><span>fact=1;</span>
+	<br><span>for(j=1;j&lt;=i;j++)</span>
+	<br><span>{</span>
+	<br><span>fact=fact*j;</span>
+	<br><span>}</span>
+	<br><span>ans=ans+((temp/fact)*fx[0][i]);</span>
+	<br><span>}</span>
+	<br><span>printf("\n f(x) = %f",ans);</span>
+	<br>}</p>
+	<p></p></div>
+	
+	<br>
+	<div>
+	<p><span>#include&lt;stdio.h&gt;
+	<br>void main() 
+	<br>{
+	<br><span>float *x,*fx,xvalue,h,p,temp,ans;</span>
+	<br><span>int n,i,j,fact;</span>
+	<br><span>printf("\n Enter the value of x to find f(x)...");</span>
+	<br><span>scanf("%f",&amp;xvalue);</span>
+	<br><span>printf("\n Enter the number of observation you want to insert...");</span>
+	<br><span>scanf("%d",&amp;n);</span>
+	</span></p><p><span data-darkreader-inline-color="">//Dynamic memory allocation</span>
+	<br><span>x=(float *)malloc(n * sizeof(float));</span>
+	<br><span>fx=(float *)malloc(n * n * sizeof(float));</span></p><p><span data-darkreader-inline-color="">//Input observation table</span>
+	<br><span>for(i=0;i&lt;n;i++)</span>
+	<br><span>{</span>
+	<br><span>printf("\n Enter the value of x...");</span>
+	<br><span>scanf("%f",(x + i));</span>
+	<br><span>printf("\n Enter the value of f(x)...");</span>
+	<br><span>scanf("%f",(fx + i*n));</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Calculate the value of <b>p</b></span>
+	<br><span>h = *(x + 1) - *(x + 0);</span>
+	<br><span>p = (xvalue - *(x + 0)) / h;</span></p><p><span data-darkreader-inline-color="">//Calculate the value of <b>∆x<sub>i</sub> , ∆<sup>2</sup>x<sub>i</sub> , ∆<sup>3</sup>x<sub>i</sub> , . . .</b> (where i = 1, 2, 3, . . . )</span>
+	<br><span>for(i=1;i&lt;n;i++)</span>
+	<br><span>{</span>
+	<br><span>for(j=0;j&lt;n-i;j++)</span>
+	<br><span>{</span>
+	<br><span>*(fx + j*n + i)=*(fx + (j+1)*n + (i-1)) - *(fx + j*n + (i-1));</span>
+	<br><span>}</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Print the value of <b>∆x<sub>i</sub> , ∆<sup>2</sup>x<sub>i</sub> , ∆<sup>3</sup>x<sub>i</sub> , . . .</b> table</span>
+	<br><span>for(i=0;i&lt;n;i++)</span>
+	<br><span>{</span>
+	<br><span>printf("\n");</span>
+	<br><span>for(j=0;j&lt;n-i;j++)</span>
+	<br><span>{</span>
+	<br><span>printf("%f   ",*(fx + i*n + j));</span>
+	<br><span>}</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Find <b>f(x)</b> using Newton's Forward Interpolation Method</span>
+	<br><span>ans = *(fx + 0);</span>
+	<br><span>for(i=1;i&lt;n;i++)</span>
+	<br><span>{</span></p><p><span data-darkreader-inline-color="">//Calculate <b>p , p(p - 1) , p(p - 1)(p - 2) , . . .</b> </span>
+	<br><span>temp = p;</span>
+	<br><span>for(j=1;j&lt;i;j++)</span>
+	<br><span>{</span>
+	<br><span>temp = temp * (p - j);</span>
+	<br><span>}</span></p><p><span data-darkreader-inline-color="">//Factorial calculation</span>
+	<br><span>fact = 1;</span>
+	<br><span>for(j=1;j&lt;=i;j++)</span>
+	<br><span>{</span>
+	<br><span>fact = fact * j;</span>
+	<br><span>}</span>
+	<br><span>ans = ans + ((temp / fact) * *(fx + i));</span>
+	<br><span>}</span>
+	<br><span>printf("\n f(x) = %f",ans);</span>
+	<br>}</p></div></div></div>
+  <span></span> <!-- for IntersectionObserver -->
+  
+  
+  
+  
+
+
+</body><style>body {
+      font-size:  18px;
+      font-family: Helvetica, Arial, sans-serif;
+      width: calc(100vw - 50px);
+    }
+    .page {
+      line-height: 27.0px;
+    }
+    h1, h2, h3 {
+      line-height: initial;
+    }</style></html>
