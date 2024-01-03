@@ -1,0 +1,13 @@
+modulation is done at sender side
+demodulation is done at receiver side
+
+digitization or analog to digital conversion -> process of converting analog signal to digital signal
+
+PAM
+	-> interval in PAM should be double of the frequency of the data
+	-> it is not full-fleged method to convert the signal
+
+how to determine 'L' (number of levels/zones)?
+	-> the more fluctuation in data, more the value of 'L' and vice-versa.
+
+delta must not be in decimal. Round it off if it come in decimal

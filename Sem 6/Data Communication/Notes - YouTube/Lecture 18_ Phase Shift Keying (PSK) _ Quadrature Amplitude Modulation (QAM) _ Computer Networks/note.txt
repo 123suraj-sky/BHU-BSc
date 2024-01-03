@@ -1,0 +1,5 @@
+phase shift keying is less susceptible to noise
+
+better than FSK also as we don't have to use two frequencies
+
+QAM combines PSK and ASK.
